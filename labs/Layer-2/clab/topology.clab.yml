@@ -29,4 +29,20 @@ topology:
             mgmt-ipv4: 192.168.0.12
             binds:
             - sn/sw1.txt:/mnt/flash/ceos-config:ro
-            startup-config: init-configs/sw1.cfg        
+            startup-config: init-configs/sw1.cfg
+        host1:
+            mgmt-ipv4: 192.168.0.13
+            binds:
+            - sn/host1.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/host1.cfg
+        host2:
+            mgmt-ipv4: 192.168.0.14
+            binds:
+            - sn/host1.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/host2.cfg                    
+    links:
+      - endpoints: ["sw1:eth1", "host1:eth1"]
+      - endpoints: ["sw1:eth2", "sw2:eth1"]
+      - endpoints: ["sw2:eth2", "sw3:eth2"]
+      - endpoints: ["sw3:eth3", "sw1:eth3"]
+      - endpoints: ["sw3:eth1", "host2:eth1"]
