@@ -1,0 +1,32 @@
+---
+
+name: Layer-2
+prefix: ""
+
+mgmt:
+    network: custom_mgmt
+    ipv4-subnet: 192.168.0.0/24
+
+topology:
+    kinds:
+        arista_ceos:
+            enforce-startup-config: true
+            image: ceos:4.35.0
+    defaults:
+        kind: arista_ceos
+    nodes:
+        sw1:
+            mgmt-ipv4: 192.168.0.10
+            binds:
+            - sn/sw1.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/sw1.cfg
+        sw2:
+            mgmt-ipv4: 192.168.0.11
+            binds:
+            - sn/sw1.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/sw1.cfg
+        sw3:
+            mgmt-ipv4: 192.168.0.12
+            binds:
+            - sn/sw1.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/sw1.cfg        
