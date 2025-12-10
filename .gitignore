@@ -1,0 +1,13 @@
+.python-version
+!anta/*
+!anta/**
+.venv/*
+.venv/**
+*/.venv/*
+**/.venv/**
+clab-Layer-2/
+clab-Layer-3/
+clab-l4*/
+*.log
+*/*.log
+**/*.log
