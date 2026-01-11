@@ -1,0 +1,60 @@
+---
+
+name: Layer-2
+prefix: ""
+
+topology:
+    kinds:
+        arista_ceos:
+            enforce-startup-config: true
+            image: ceos:4.34.1F
+    defaults:
+        kind: arista_ceos
+    nodes:
+        sw1:
+            binds:
+            - sn/sw1.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/sw1.cfg
+        sw2:
+            binds:
+            - sn/sw2.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/sw2.cfg
+        sw3:
+            binds:
+            - sn/sw3.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/sw3.cfg
+        sw4:
+            binds:
+            - sn/sw4.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/sw4.cfg         
+# --- Linux Hosts ---
+        linux1:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool # Alpine based with networking tools (ping, ip, etc.)
+            exec:
+                - ip addr add 192.168.10.1/24 dev eth1 # Pre-configure IP
+        linux2:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            exec:
+                - ip addr add 192.168.10.2/24 dev eth1                  
+    links:
+    # --- Ring Topology Connections ---
+    # SW1 to SW2
+    - endpoints: ["sw1:eth1", "sw2:eth1"]
+    
+    # SW2 to SW3
+    - endpoints: ["sw2:eth2", "sw3:eth1"]
+    
+    # SW3 to SW4
+    - endpoints: ["sw3:eth2", "sw4:eth1"]
+    
+    # SW4 to SW1 (Closing the ring)
+    - endpoints: ["sw4:eth2", "sw1:eth2"]
+
+    # --- Host Connections ---
+    # Linux1 to SW1
+    - endpoints: ["linux1:eth1", "sw1:eth3"]
+    
+    # Linux2 to SW2
+    - endpoints: ["linux2:eth1", "sw2:eth3"]

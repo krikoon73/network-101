@@ -1,0 +1,39 @@
+{
+  "freeTextAnnotations": [],
+  "freeShapeAnnotations": [],
+  "groupStyleAnnotations": [],
+  "networkNodeAnnotations": [],
+  "nodeAnnotations": [
+    {
+      "id": "sw1",
+      "position": {
+        "x": -7,
+        "y": 77
+      }
+    },
+    {
+      "id": "linux1",
+      "position": {
+        "x": -91,
+        "y": 133
+      }
+    },
+    {
+      "id": "sw2",
+      "position": {
+        "x": 77,
+        "y": 77
+      }
+    },
+    {
+      "id": "linux2",
+      "position": {
+        "x": 63,
+        "y": 133
+      }
+    }
+  ],
+  "edgeAnnotations": [],
+  "aliasEndpointAnnotations": [],
+  "viewerSettings": {}
+}
