@@ -1,0 +1,172 @@
+{
+  "name": "Basic-topo",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-828e0ab95c48",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "3fff:172:20:20::/64",
+        "ipv6-gw": "3fff:172:20:20::1",
+        "external-access": true
+      }
+    }
+  },
+  "ssh-pub-keys": ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIAWNOotUPchJ71lDB0qbc3oTF002UouEzrgB9cqnNvk","ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCrP5aRgo4ZLPuwQgAskxtpclcLr49FNAXFQ2XxI3W+3StcVbSPCmeWeAQMOtWtA6c7HzWJTYTu1aItYQbM0YTR4j6FwE2bXmC22dJtSuTidTMeele/zss5nB4Oj9/+D1/FuaeKM8ALTs8ZYZ2hMRt4Hqmullv4J9rn/buyVcRvXXgHDQXaEnS1Q40D/qEF3VduR/oex836nrL/UfNms3+iZ0BzqlovKUK9jsu3CzW2Bo1K78viG5BK1tFU36huL1TSJ/XYskj4I/EQXpBBOKyWj+mrC/KK+b6OjBr4YlJ7NlVu09uDCJDoXKaixfUv6WxI+j5AISW+zLpn5AMM8WrJKInKKBwfyB8lNaPXXRR2MxmtmRwwMF0piBu+X9UhGY6xUfABj1f080Q7eqb8Pj5Ch1Le0cwtIXmjCXIc9GemYlXhb7NC1Z95KAmbbwavGI4fIY8zIvuRD1r1mRtRoEG84ZqJXURtXrhCtc1O9CQBG5CTtEtNX6IeQ4eZPja2uts=","ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO59VAtlNWejUR33M0r1ThDeEJM9nZE4TAbnXxneMOAY","ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCcY4prnNJs/I86WypkroySdqL7KQif8w46Bx4Lg/0S2j58hFWOQhw+Ql7YL09Rw0w+OruYXZ+l4rjnirWZqxbAHTUGf+IuoqnB/0jko6kEAhZx1YGYmQeKpMTrrX6jJj6HPtObHuJVnCy9LibFfndBUnfaze7U9ilTC33f6/551QwbL/BS4Wcm0CRD5mPE/9T7B4t5uRVTwlTR9+MTzTwfMpVW5hwnGAeRcP824jRBecVILUI6btBJoB3NseeLiIEM1BuAsxqZNBAft0L3hn7p7vIzK59h9jPpRubTkloE+4UYGqmX31O0V7ijFxFJ5v7TVHG1nRW+boIsnC1ELy/8Yi6281H/pSnqWz2Iwdz8+J8aXQJF/whV5OpwDIKKPBB14+jVVVbR9aH9Ycvjnqw/xSuwD9BMb31e3OWrEJnSl3/N35nqnGMFKm9r2ULKBWAXXKm9IdCsVBGcjnRtZskIyBRihQnUpLuD9zM/I1UTAoEJ3WKXc60EeIQem3ux1aU="],
+  "nodes": {
+    "linux1": {
+      "index": "0",
+      "shortname": "linux1",
+      "longname": "linux1",
+      "fqdn": "linux1.Basic-topo.io",
+      "group": "",
+      "labdir": "/Users/ccompain/Documents/code/Dauphine/MIAGE/network-101/labs/Seminar-1/clab/clab-Basic-topo/linux1",
+      "kind": "linux",
+      "image": "ghcr.io/hellt/network-multitool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-828e0ab95c48",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/Users/ccompain/Documents/code/Dauphine/MIAGE/network-101/labs/Seminar-1/clab/clab-Basic-topo/linux1",
+        "clab-node-longname": "linux1",
+        "clab-node-name": "linux1",
+        "clab-node-type": "",
+        "clab-owner": "ccompain",
+        "clab-topo-file": "/Users/ccompain/Documents/code/Dauphine/MIAGE/network-101/labs/Seminar-1/clab/topology.clab.yml",
+        "containerlab": "Basic-topo"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "linux2": {
+      "index": "1",
+      "shortname": "linux2",
+      "longname": "linux2",
+      "fqdn": "linux2.Basic-topo.io",
+      "group": "",
+      "labdir": "/Users/ccompain/Documents/code/Dauphine/MIAGE/network-101/labs/Seminar-1/clab/clab-Basic-topo/linux2",
+      "kind": "linux",
+      "image": "ghcr.io/hellt/network-multitool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-828e0ab95c48",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/Users/ccompain/Documents/code/Dauphine/MIAGE/network-101/labs/Seminar-1/clab/clab-Basic-topo/linux2",
+        "clab-node-longname": "linux2",
+        "clab-node-name": "linux2",
+        "clab-node-type": "",
+        "clab-owner": "ccompain",
+        "clab-topo-file": "/Users/ccompain/Documents/code/Dauphine/MIAGE/network-101/labs/Seminar-1/clab/topology.clab.yml",
+        "containerlab": "Basic-topo"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "sw1": {
+      "index": "2",
+      "shortname": "sw1",
+      "longname": "sw1",
+      "fqdn": "sw1.Basic-topo.io",
+      "group": "",
+      "labdir": "/Users/ccompain/Documents/code/Dauphine/MIAGE/network-101/labs/Seminar-1/clab/clab-Basic-topo/sw1",
+      "kind": "arista_ceos",
+      "image": "ceos:4.34.1F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:69:e0:82",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-828e0ab95c48",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/Users/ccompain/Documents/code/Dauphine/MIAGE/network-101/labs/Seminar-1/clab/clab-Basic-topo/sw1",
+        "clab-node-longname": "sw1",
+        "clab-node-name": "sw1",
+        "clab-node-type": "",
+        "clab-owner": "ccompain",
+        "clab-topo-file": "/Users/ccompain/Documents/code/Dauphine/MIAGE/network-101/labs/Seminar-1/clab/topology.clab.yml",
+        "containerlab": "Basic-topo"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "endpoints": {
+        "a": {
+          "node": "linux1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:74:8e:21",
+          "peer": "z"
+        },
+        "z": {
+          "node": "sw1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:4e:52:7b",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "linux2",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:05:1f:5d",
+          "peer": "z"
+        },
+        "z": {
+          "node": "sw1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:af:63:15",
+          "peer": "a"
+        }
+      }
+    }
+  ]
+}
