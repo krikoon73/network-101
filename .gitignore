@@ -5,6 +5,7 @@
 .venv/**
 */.venv/*
 **/.venv/**
+clab-Basic-topo/
 clab-Layer-2/
 clab-Layer-3/
 clab-l4*/
