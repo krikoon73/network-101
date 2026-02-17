@@ -32,8 +32,8 @@
       "id": "ceos1",
       "icon": "router",
       "position": {
-        "x": 259,
-        "y": 133
+        "x": 301,
+        "y": 119
       },
       "geoCoordinates": {
         "lat": 48.684826888402256,
@@ -44,8 +44,8 @@
       "id": "ceos2",
       "icon": "router",
       "position": {
-        "x": 259,
-        "y": 203
+        "x": 315,
+        "y": 217
       },
       "geoCoordinates": {
         "lat": 48.684826888402256,
@@ -56,8 +56,8 @@
       "id": "ceos3",
       "icon": "router",
       "position": {
-        "x": 203,
-        "y": 203
+        "x": 175,
+        "y": 189
       },
       "geoCoordinates": {
         "lat": 48.684826888402256,

@@ -8,7 +8,7 @@
 clab-Basic-topo*/
 clab-Layer-2/
 clab-Layer-3/
-clab-l4*/
+clab-Layer-4/
 *.log
 */*.log
 **/*.log

@@ -1,0 +1,148 @@
+---
+
+name: Layer-4
+prefix: ""
+
+topology:
+    kinds:
+        arista_ceos:
+            enforce-startup-config: true
+            image: ceos:4.35.0F
+    defaults:
+        kind: arista_ceos
+    nodes:
+        # Layer-3 Routers
+        external-access:
+            binds:
+            - sn/external-access.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/external-access.cfg
+
+        core:
+            binds:
+            - sn/core.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/core.cfg
+
+        # Service Containers
+        firewall:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            exec:
+                # Set MTU
+                - ip link set dev eth1 mtu 1500
+                - ip link set dev eth2 mtu 1500
+                # Configure IP addresses on both interfaces
+                - ip addr add 10.100.3.10/24 dev eth1
+                - ip addr add 10.100.3.20/24 dev eth2
+                # Enable IP forwarding
+                - sysctl -w net.ipv4.ip_forward=1
+                # Add static routes
+                - sh -c "ip route del default 2>/dev/null || true"
+                - ip route add 10.100.1.0/24 via 10.100.3.1 dev eth1
+                - ip route add 10.100.2.0/24 via 10.100.3.1 dev eth1
+                - ip route add 10.100.4.0/24 via 10.100.3.21 dev eth2
+                - ip route add 10.100.5.0/24 via 10.100.3.21 dev eth2
+                - ip route add 10.100.6.0/24 via 10.100.3.21 dev eth2
+                - ip route add 10.100.7.0/24 via 10.100.3.21 dev eth2
+                - ip route add 10.100.8.0/24 via 10.100.3.21 dev eth2
+                - ip route add 10.100.100.10/32 via 10.100.3.21 dev eth2
+
+        reverse-proxy:
+            kind: linux
+            image: nginx:alpine
+            binds:
+                - services/nginx-proxy.conf:/etc/nginx/nginx.conf:ro
+                - services/certs/reverse-proxy-cert.pem:/etc/nginx/certs/reverse-proxy-cert.pem:ro
+                - services/certs/reverse-proxy-key.pem:/etc/nginx/certs/reverse-proxy-key.pem:ro
+                - services/certs/ca-cert.pem:/etc/nginx/certs/ca-cert.pem:ro
+            exec:
+                # Frontend interface (client-facing) with VIP
+                - ip link set dev eth1 mtu 1500
+                - ip addr add 10.100.5.10/24 dev eth1
+                - ip addr add 10.100.100.10/32 dev eth1
+                # Backend interface (server-facing)
+                - ip link set dev eth2 mtu 1500
+                - ip addr add 10.100.6.10/24 dev eth2
+                # Enable IP forwarding
+                - sysctl -w net.ipv4.ip_forward=1
+                # Routing: default via frontend, backend network via eth2
+                - sh -c "ip route del default 2>/dev/null || true"
+                - ip route add default via 10.100.5.1 dev eth1
+                - ip route add 10.100.4.0/24 via 10.100.6.1 dev eth2
+                - sysctl -w net.ipv4.tcp_timestamps=0
+                - sh -c "sleep 1 && nginx -s reload"
+
+        web-server:
+            kind: linux
+            image: nginx:alpine
+            binds:
+                - services/nginx-web.conf:/etc/nginx/nginx.conf:ro
+                - services/index.html:/usr/share/nginx/html/index.html:ro
+                - services/certs/web-server-cert.pem:/etc/nginx/certs/web-server-cert.pem:ro
+                - services/certs/web-server-key.pem:/etc/nginx/certs/web-server-key.pem:ro
+                - services/certs/ca-cert.pem:/etc/nginx/certs/ca-cert.pem:ro
+            exec:
+                - ip link set dev eth1 mtu 1500
+                - ip addr add 10.100.4.10/24 dev eth1
+                - sh -c "ip route del default 2>/dev/null || true; ip route add default via 10.100.4.1"
+                - sysctl -w net.ipv4.tcp_timestamps=0
+                - sh -c "sleep 1 && nginx -s reload"
+
+        dns-server:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            binds:
+                - services/dhcpd.conf:/etc/dhcp/dhcpd.conf:ro
+            exec:
+                - ip addr add 10.100.8.20/24 dev eth1
+                - sh -c "ip route del default 2>/dev/null || true; ip route add default via 10.100.8.1"
+
+        basic-http-server:
+            kind: linux
+            image: nginx:alpine
+            binds:
+                - services/nginx-basic-http.conf:/etc/nginx/nginx.conf:ro
+                - services/index-basic-http.html:/usr/share/nginx/html/index.html:ro
+            exec:
+                - ip link set dev eth1 mtu 1500
+                - ip addr add 10.100.7.10/24 dev eth1
+                - sh -c "ip route del default 2>/dev/null || true; ip route add default via 10.100.7.1"
+                - sysctl -w net.ipv4.tcp_timestamps=0
+                - sh -c "sleep 1 && nginx -s reload"
+
+        # Client Containers
+        udp-client:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            exec:
+                - ip link set dev eth1 mtu 1500
+                - ip addr add 10.100.1.10/24 dev eth1
+                - sh -c "ip route del default 2>/dev/null || true; ip route add default via 10.100.1.1"
+
+        tcp-client:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            exec:
+                - ip link set dev eth1 mtu 1500
+                - ip addr add 10.100.2.10/24 dev eth1
+                - sh -c "ip route del default 2>/dev/null || true; ip route add default via 10.100.2.1"
+
+    links:
+    # --- Client Connections to External-Access ---
+    - endpoints: ["udp-client:eth1", "external-access:eth1"]
+    - endpoints: ["tcp-client:eth1", "external-access:eth2"]
+
+    # --- Firewall between External-Access and Core ---
+    - endpoints: ["external-access:eth3", "firewall:eth1"]
+    - endpoints: ["firewall:eth2", "core:eth1"]
+
+    # --- Service Connections to Core ---
+    # Reverse-proxy frontend (client-facing)
+    - endpoints: ["reverse-proxy:eth1", "core:eth2"]
+    # Reverse-proxy backend (server-facing)
+    - endpoints: ["reverse-proxy:eth2", "core:eth3"]
+    # Web server and DNS server
+    - endpoints: ["web-server:eth1", "core:eth4"]
+    - endpoints: ["dns-server:eth1", "core:eth5"]
+    # Basic HTTP server (unencrypted)
+    - endpoints: ["basic-http-server:eth1", "core:eth6"]
+
