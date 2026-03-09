@@ -1,0 +1,56 @@
+---
+edge1:
+    username: admin
+    password: admin
+    platform: arista_ceos
+    hostname: 172.20.20.11
+edge2:
+    username: admin
+    password: admin
+    platform: arista_ceos
+    hostname: 172.20.20.5
+r1:
+    username: admin
+    password: admin
+    platform: arista_ceos
+    hostname: 172.20.20.7
+r2:
+    username: admin
+    password: admin
+    platform: arista_ceos
+    hostname: 172.20.20.8
+r3:
+    username: admin
+    password: admin
+    platform: arista_ceos
+    hostname: 172.20.20.9
+sw1:
+    username: admin
+    password: admin
+    platform: arista_ceos
+    hostname: 172.20.20.6
+sw2:
+    username: admin
+    password: admin
+    platform: arista_ceos
+    hostname: 172.20.20.10
+host1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.2
+host2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.4
+host3:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.3
+host4:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.12

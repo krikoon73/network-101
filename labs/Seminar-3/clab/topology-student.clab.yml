@@ -1,0 +1,117 @@
+---
+# Student Lab Topology
+# This topology uses student-configs for R2 and Edge2
+# Students will configure OSPF on R2 and BGP on Edge2
+
+name: Layer-3-Student-Lab
+prefix: ""
+
+topology:
+    kinds:
+        arista_ceos:
+            enforce-startup-config: true
+            image: ceos:4.35.0F
+    defaults:
+        kind: arista_ceos
+    nodes:
+        # Core OSPF routers
+        r1:
+            binds:
+            - sn/r1.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/r1.cfg
+        r2:
+            binds:
+            - sn/r2.txt:/mnt/flash/ceos-config:ro
+            startup-config: student-configs/r2.cfg  # STUDENT CONFIGURES OSPF
+        r3:
+            binds:
+            - sn/r3.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/r3.cfg
+        
+        # Edge BGP routers
+        edge1:
+            binds:
+            - sn/edge1.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/edge1.cfg
+        edge2:
+            binds:
+            - sn/edge2.txt:/mnt/flash/ceos-config:ro
+            startup-config: student-configs/edge2.cfg  # STUDENT CONFIGURES BGP
+        
+        # Access switches with VLANs
+        sw1:
+            binds:
+            - sn/sw1.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/sw1.cfg
+        sw2:
+            binds:
+            - sn/sw2.txt:/mnt/flash/ceos-config:ro
+            startup-config: init-configs/sw2.cfg
+
+# --- Linux Hosts ---
+        host1:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            exec:
+                - ip addr add 10.10.10.10/24 dev eth1
+                - ip route del default via 172.20.20.1 || true
+                - ip route add default via 10.10.10.1
+        host2:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            exec:
+                - ip addr add 10.10.20.10/24 dev eth1
+                - ip route del default via 172.20.20.1 || true
+                - ip route add default via 10.10.20.1
+        host3:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            exec:
+                - ip addr add 10.20.10.10/24 dev eth1
+                - ip route del default via 172.20.20.1 || true
+                - ip route add default via 10.20.10.1
+        host4:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            exec:
+                - ip addr add 10.20.20.10/24 dev eth1
+                - ip route del default via 172.20.20.1 || true
+                - ip route add default via 10.20.20.1
+                  
+    links:
+    # --- OSPF Core Triangle (Area 0) ---
+    # R1 to R2
+    - endpoints: ["r1:eth1", "r2:eth1"]
+    
+    # R2 to R3
+    - endpoints: ["r2:eth2", "r3:eth1"]
+    
+    # R3 to R1
+    - endpoints: ["r3:eth2", "r1:eth2"]
+    
+    # --- BGP Edge Connections ---
+    # Edge1 to R1 (OSPF/BGP boundary)
+    - endpoints: ["edge1:eth1", "r1:eth3"]
+    
+    # Edge2 to R3 (OSPF/BGP boundary)
+    - endpoints: ["edge2:eth1", "r3:eth3"]
+    
+    # Edge1 to Edge2 (BGP peering)
+    - endpoints: ["edge1:eth2", "edge2:eth2"]
+    
+    # --- Access Layer (Inter-VLAN routing) ---
+    # SW1 to R1 (trunk for VLANs)
+    - endpoints: ["sw1:eth1", "r1:eth4"]
+    
+    # SW2 to R3 (trunk for VLANs)
+    - endpoints: ["sw2:eth1", "r3:eth4"]
+    
+    # --- Host Connections ---
+    # Hosts to SW1 (VLAN 10 and 20)
+    - endpoints: ["host1:eth1", "sw1:eth2"]
+    - endpoints: ["host2:eth1", "sw1:eth3"]
+    
+    # Hosts to SW2 (VLAN 10 and 20)
+    - endpoints: ["host3:eth1", "sw2:eth2"]
+    - endpoints: ["host4:eth1", "sw2:eth3"]
+

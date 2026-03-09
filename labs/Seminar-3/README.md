@@ -317,7 +317,7 @@ make start
 ```bash
 make stop
 ```
-
+ 
 ### Inspecting the Lab
 ```bash
 make inspect

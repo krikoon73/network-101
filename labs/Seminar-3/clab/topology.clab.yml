@@ -51,24 +51,28 @@ topology:
             image: ghcr.io/hellt/network-multitool
             exec:
                 - ip addr add 10.10.10.10/24 dev eth1
+                - ip route del default via 172.20.20.1 || true
                 - ip route add default via 10.10.10.1
         host2:
             kind: linux
             image: ghcr.io/hellt/network-multitool
             exec:
                 - ip addr add 10.10.20.10/24 dev eth1
+                - ip route del default via 172.20.20.1 || true
                 - ip route add default via 10.10.20.1
         host3:
             kind: linux
             image: ghcr.io/hellt/network-multitool
             exec:
                 - ip addr add 10.20.10.10/24 dev eth1
+                - ip route del default via 172.20.20.1 || true
                 - ip route add default via 10.20.10.1
         host4:
             kind: linux
             image: ghcr.io/hellt/network-multitool
             exec:
                 - ip addr add 10.20.20.10/24 dev eth1
+                - ip route del default via 172.20.20.1 || true
                 - ip route add default via 10.20.20.1
                   
     links:

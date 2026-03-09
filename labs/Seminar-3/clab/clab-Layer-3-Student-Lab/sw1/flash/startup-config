@@ -1,0 +1,68 @@
+! Startup-config last modified at Sat Mar  7 15:46:24 2026 by root
+! device: sw1 (cEOSLab, EOS-4.35.0F-44171508.4350F (engineering build))
+!
+no aaa root
+aaa authentication policy local allow-nopassword-remote-login
+!
+username admin privilege 15 role network-admin nopassword
+!
+management api http-commands
+   no shutdown
+!
+switchport default mode routed
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname sw1
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+vlan 10,20
+!
+aaa authorization exec default local
+!
+interface Ethernet1
+   description Trunk to R1
+   switchport trunk allowed vlan 10,20
+   switchport mode trunk
+   switchport
+!
+interface Ethernet2
+   description Host1 - VLAN 10
+   switchport access vlan 10
+   switchport
+!
+interface Ethernet3
+   description Host2 - VLAN 20
+   switchport access vlan 20
+   switchport
+!
+interface Management0
+   ip address 172.20.20.6/24
+   ipv6 address 3fff:172:20:20::6/64
+!
+interface Vlan10
+   ip address 10.10.10.254/24
+!
+ip routing
+!
+ntp server time.apple.com source Management0
+ntp server time.google.com source Management0
+ntp server time.windows.com source Management0
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end

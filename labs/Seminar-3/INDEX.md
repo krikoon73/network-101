@@ -7,6 +7,7 @@ Welcome to the Layer-3 Lab! This index helps you navigate all available document
 **New to this lab?** Start with [LAB_SUMMARY.md](LAB_SUMMARY.md) for a quick overview.
 
 **Ready to begin?** Choose your mode:
+- **Student Lab Mode**: See [Quick Start - Student Lab](#quick-start---student-lab-mode) below ⭐ **NEW**
 - **Pre-Built Mode**: See [Quick Start - Pre-Built](#quick-start---pre-built-mode) below
 - **Build Mode**: See [Quick Start - Build](#quick-start---build-mode) below
 
@@ -44,9 +45,20 @@ Welcome to the Layer-3 Lab! This index helps you navigate all available document
 - Final verification steps
 - Configuration saving instructions
 
-### 4. [QUICK_REFERENCE.md](QUICK_REFERENCE.md)
-**Purpose**: Command reference and quick lookup  
-**Read this if**: You need quick access to commands or IP addresses  
+### 4. [STUDENT_LAB_GUIDE.md](STUDENT_LAB_GUIDE.md) ⭐ **NEW**
+**Purpose**: Focused student lab for OSPF and BGP configuration
+**Read this if**: You want a guided hands-on lab configuring specific protocols
+**Contains**:
+- Step-by-step OSPF configuration on R2
+- Step-by-step BGP configuration on Edge2
+- Basic, intermediate, and advanced verification steps
+- Troubleshooting scenarios
+- Advanced challenges
+- Complete verification checklist
+
+### 5. [QUICK_REFERENCE.md](QUICK_REFERENCE.md)
+**Purpose**: Command reference and quick lookup
+**Read this if**: You need quick access to commands or IP addresses
 **Contains**:
 - Essential commands for OSPF, BGP, VLANs
 - Complete IP addressing tables
@@ -54,17 +66,55 @@ Welcome to the Layer-3 Lab! This index helps you navigate all available document
 - Troubleshooting flowchart
 - Device access methods
 
-### 5. [clab/minimal-configs/README.md](clab/minimal-configs/README.md)
-**Purpose**: Information about minimal configuration files  
-**Read this if**: You want to understand the starting point for build mode  
+### 6. [clab/minimal-configs/README.md](clab/minimal-configs/README.md)
+**Purpose**: Information about minimal configuration files
+**Read this if**: You want to understand the starting point for build mode
 **Contains**:
 - What's included in minimal configs
 - What you need to configure
 - How to switch between modes
 
+### 7. [clab/student-configs/README.md](clab/student-configs/README.md) ⭐ **NEW**
+**Purpose**: Information about student lab configuration files
+**Read this if**: You're using the student lab mode
+**Contains**:
+- What's pre-configured on R2 and Edge2
+- What students need to configure
+- How to deploy the student lab
+- Verification steps
+
 ---
 
 ## 🚀 Quick Start Guides
+
+### Quick Start - Student Lab Mode ⭐ **NEW**
+
+**Best for**: Focused hands-on practice configuring OSPF and BGP
+
+```bash
+# 1. Navigate to lab
+cd labs/Seminar-3
+
+# 2. Start the student lab
+make start-student
+
+# 3. Wait 2-3 minutes for devices to boot
+
+# 4. Verify lab is running
+make inspect-student
+
+# 5. Follow STUDENT_LAB_GUIDE.md for configuration steps
+```
+
+**What you'll configure**:
+- OSPF on R2 (router-id, interfaces, areas)
+- BGP on Edge2 (AS 65002, eBGP peering, route advertisement)
+
+**What's pre-configured**: R1, R3, Edge1, SW1, SW2, and all hosts
+
+**Next steps**: Open [STUDENT_LAB_GUIDE.md](STUDENT_LAB_GUIDE.md) and start with Part 1.
+
+---
 
 ### Quick Start - Pre-Built Mode
 
@@ -118,6 +168,15 @@ make start
 
 ## 🗺️ Learning Paths
 
+### Path 0: Student Lab - Focused Practice (1-1.5 hours) ⭐ **NEW**
+**Best for**: Students learning OSPF and BGP configuration
+1. Read [STUDENT_LAB_GUIDE.md](STUDENT_LAB_GUIDE.md) introduction
+2. Start lab with `make start-student`
+3. Configure OSPF on R2 (Part 1)
+4. Configure BGP on Edge2 (Part 2)
+5. Complete verification exercises (Part 3)
+6. Try advanced challenges (Part 4)
+
 ### Path 1: Quick Exploration (30 minutes)
 1. Read [LAB_SUMMARY.md](LAB_SUMMARY.md)
 2. Start lab in pre-built mode
@@ -152,14 +211,17 @@ make start
 labs/Seminar-3/
 ├── README.md                    # Verification exercises
 ├── BUILD_GUIDE.md              # Step-by-step build instructions
+├── STUDENT_LAB_GUIDE.md        # Student lab guide (OSPF & BGP) ⭐ NEW
 ├── QUICK_REFERENCE.md          # Command and IP reference
 ├── LAB_SUMMARY.md              # Lab overview
 ├── INDEX.md                    # This file
 ├── Makefile                    # Lab management commands
 └── clab/
-    ├── topology.clab.yml       # Containerlab topology
+    ├── topology.clab.yml       # Containerlab topology (full configs)
+    ├── topology-student.clab.yml # Student lab topology ⭐ NEW
     ├── init-configs/           # Pre-built configurations (7 files)
     ├── minimal-configs/        # Minimal starting configs (7 files + README)
+    ├── student-configs/        # Student lab configs (R2, Edge2 + README) ⭐ NEW
     └── sn/                     # Serial number files (7 files)
 ```
 
@@ -171,6 +233,7 @@ labs/Seminar-3/
 |----------|---------------------|-------------|
 | LAB_SUMMARY.md | Overview | Beginner |
 | QUICK_REFERENCE.md | All (reference) | All levels |
+| STUDENT_LAB_GUIDE.md | OSPF, BGP (focused) | Intermediate ⭐ |
 | README.md | OSPF, BGP, Inter-VLAN | Intermediate |
 | BUILD_GUIDE.md | OSPF, BGP, Inter-VLAN | Advanced |
 
@@ -198,6 +261,16 @@ labs/Seminar-3/
 
 ## 🔄 Common Tasks
 
+### Start Student Lab
+```bash
+make start-student
+```
+
+### Stop Student Lab
+```bash
+make stop-student
+```
+
 ### Switch to Build Mode
 ```bash
 cp clab/minimal-configs/* clab/init-configs/
@@ -218,9 +291,7 @@ ssh admin@r1 "show running-config" > my-r1-config.cfg
 
 ### Reset Everything
 ```bash
-make stop
-cp backup/init-configs/* clab/init-configs/
-make start
+make clean
 ```
 
 ---
@@ -230,7 +301,11 @@ make start
 - **Devices**: 7 network devices + 4 hosts
 - **Technologies**: OSPF, BGP, Inter-VLAN Routing, VLANs
 - **Configuration Lines**: ~500 (pre-built mode)
-- **Estimated Time**: 30 min (explore) to 4 hours (complete build)
+- **Estimated Time**:
+  - Student Lab: 60-90 minutes ⭐
+  - Quick Explore: 30 minutes
+  - Full Verification: 2 hours
+  - Complete Build: 3-4 hours
 - **Difficulty**: Intermediate to Advanced
 
 ---
