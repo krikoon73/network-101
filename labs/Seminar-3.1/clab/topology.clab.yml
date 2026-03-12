@@ -1,0 +1,75 @@
+name: Layer-3-Advanced-Lab
+
+mgmt:
+    network: custom-mgmt
+    ipv4-subnet: 172.20.20.0/24
+
+topology:
+    kinds:
+        ceos:
+            image: ceos:latest
+        linux:
+            image: ghcr.io/hellt/network-multitool
+
+    nodes:
+# --- Routers ---
+        isp:
+            kind: ceos
+            mgmt-ipv4: 172.20.20.10
+            startup-config: init-configs/isp.cfg
+        edge:
+            kind: ceos
+            mgmt-ipv4: 172.20.20.11
+            startup-config: init-configs/edge.cfg
+        r1:
+            kind: ceos
+            mgmt-ipv4: 172.20.20.12
+            startup-config: init-configs/r1.cfg
+        r2:
+            kind: ceos
+            mgmt-ipv4: 172.20.20.13
+            startup-config: init-configs/r2.cfg
+
+# --- Linux Hosts ---
+        client:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            exec:
+                - ip addr add 10.3.10.10/24 dev eth1
+                - sh -c "ip route del default via 172.20.20.1 || true"
+                - ip route add default via 10.3.10.1
+        site1:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            exec:
+                - ip addr add 10.1.10.10/24 dev eth1
+                - sh -c "ip route del default via 172.20.20.1 || true"
+                - ip route add default via 10.1.10.1
+        site2:
+            kind: linux
+            image: ghcr.io/hellt/network-multitool
+            exec:
+                - ip addr add 10.2.10.10/24 dev eth1
+                - sh -c "ip route del default via 172.20.20.1 || true"
+                - ip route add default via 10.2.10.1
+                  
+    links:
+    # ISP to CLIENT (VLAN 10)
+    - endpoints: ["client:eth1", "isp:eth1"]
+    
+    # ISP to EDGE
+    - endpoints: ["isp:eth2", "edge:eth1"]
+    
+    # EDGE to R1 and R2
+    - endpoints: ["edge:eth2", "r1:eth1"]
+    - endpoints: ["edge:eth3", "r2:eth1"]
+    
+    # R1 to R2
+    - endpoints: ["r1:eth2", "r2:eth2"]
+    
+    # R1 to SITE1 (VLAN 10)
+    - endpoints: ["r1:eth3", "site1:eth1"]
+    
+    # R2 to SITE2 (VLAN 10)
+    - endpoints: ["r2:eth3", "site2:eth1"]
+

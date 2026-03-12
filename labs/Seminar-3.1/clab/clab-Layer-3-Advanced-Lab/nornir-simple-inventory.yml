@@ -1,0 +1,36 @@
+---
+edge:
+    username: admin
+    password: admin
+    platform: ceos
+    hostname: 172.20.20.11
+isp:
+    username: admin
+    password: admin
+    platform: ceos
+    hostname: 172.20.20.10
+r1:
+    username: admin
+    password: admin
+    platform: ceos
+    hostname: 172.20.20.12
+r2:
+    username: admin
+    password: admin
+    platform: ceos
+    hostname: 172.20.20.13
+client:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.4
+site1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.3
+site2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.2

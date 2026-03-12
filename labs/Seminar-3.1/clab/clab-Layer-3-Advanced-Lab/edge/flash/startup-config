@@ -1,0 +1,68 @@
+! Startup-config last modified at Thu Mar 12 06:14:45 2026 by root
+! device: edge (cEOSLab, EOS-4.34.2F-43237028.4342F (engineering build))
+!
+enable password sha512 $6$Y4iYFSJzIRkbGJcG$6p2GxCCggNZun55ckPvWKtXYPXy51HjMMW4UeYoO63QE5o1TdP2jZdprjqZvTFE9/FQu9fgthFZ/VB.IGDJID.
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$vS1oclxIxXQn6nue$oflJ07tHdseCz0ToogzeQwUGFEKKAkHm8XVF.Fjnc1N5/g5xhd17uMOx7PjoNA.b6klmX1ZbL8AzHDrVbAloK/
+!
+management api http-commands
+   no shutdown
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname edge
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+interface Ethernet1
+   description Link to ISP
+   no switchport
+   ip address 172.16.100.2/30
+!
+interface Ethernet2
+   description Link to R1
+   no switchport
+   ip address 172.16.100.5/30
+!
+interface Ethernet3
+   description Link to R2
+   no switchport
+   ip address 172.16.100.9/30
+!
+interface Loopback0
+   description Router ID
+   ip address 172.16.0.1/32
+!
+interface Management0
+   ip address 172.20.20.11/24
+!
+ip routing
+!
+router bgp 65000
+   router-id 172.16.0.1
+   neighbor 172.16.100.1 remote-as 65001
+   neighbor 172.16.100.1 description eBGP to ISP
+   redistribute ospf
+   !
+   address-family ipv4
+      neighbor 172.16.100.1 activate
+      redistribute ospf
+!
+router ospf 1
+   router-id 172.16.0.1
+   redistribute bgp
+   network 172.16.0.1/32 area 0.0.0.0
+   network 172.16.100.4/30 area 0.0.0.0
+   network 172.16.100.8/30 area 0.0.0.0
+   max-lsa 12000
+!
+end

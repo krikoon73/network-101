@@ -1,0 +1,69 @@
+! Startup-config last modified at Thu Mar 12 06:14:37 2026 by root
+! device: isp (cEOSLab, EOS-4.34.2F-43237028.4342F (engineering build))
+!
+enable password sha512 $6$TKPxyRPNBKTpHgPI$i/M5yEwlo/cNEQmhEzbNO2n/wuyZq7.hopiBt9YB43edgVq.z66dIQQoc1zt45GqiUGQZWeAMF7bEJWMjQtgR0
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$r3CQw2MH1x8HDuS2$AjbKMVt3yeZWU6pVik90yU8GhaeXmIFo3LmfBt53t49SISuDqOtPRDbJuBWT724lYTe3uEvuwp/gAAIcRG3qN/
+!
+management api http-commands
+   no shutdown
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname isp
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+vlan 10
+   name CLIENT_VLAN
+!
+interface Ethernet1
+   description Link to CLIENT
+   switchport access vlan 10
+!
+interface Ethernet2
+   description Link to EDGE
+   no switchport
+   ip address 172.16.100.1/30
+!
+interface Loopback0
+   description Router ID
+   ip address 172.16.0.2/32
+!
+interface Management0
+   ip address 172.20.20.10/24
+!
+interface Vlan10
+   description CLIENT Network
+   ip address 10.3.10.1/24
+!
+ip routing
+!
+ip route 10.3.10.0/24 Vlan10
+!
+router bgp 65001
+   router-id 172.16.0.2
+   neighbor 172.16.100.2 remote-as 65000
+   neighbor 172.16.100.2 description eBGP to EDGE
+   !
+   address-family ipv4
+      neighbor 172.16.100.2 activate
+      network 10.3.10.0/24
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end

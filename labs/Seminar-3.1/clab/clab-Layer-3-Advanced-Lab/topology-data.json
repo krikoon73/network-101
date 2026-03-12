@@ -1,0 +1,386 @@
+{
+  "name": "Layer-3-Advanced-Lab",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "custom-mgmt",
+        "bridge": "br-fd0223816132",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "external-access": true
+      }
+    }
+  },
+  "ssh-pub-keys": ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIAWNOotUPchJ71lDB0qbc3oTF002UouEzrgB9cqnNvk","ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCrP5aRgo4ZLPuwQgAskxtpclcLr49FNAXFQ2XxI3W+3StcVbSPCmeWeAQMOtWtA6c7HzWJTYTu1aItYQbM0YTR4j6FwE2bXmC22dJtSuTidTMeele/zss5nB4Oj9/+D1/FuaeKM8ALTs8ZYZ2hMRt4Hqmullv4J9rn/buyVcRvXXgHDQXaEnS1Q40D/qEF3VduR/oex836nrL/UfNms3+iZ0BzqlovKUK9jsu3CzW2Bo1K78viG5BK1tFU36huL1TSJ/XYskj4I/EQXpBBOKyWj+mrC/KK+b6OjBr4YlJ7NlVu09uDCJDoXKaixfUv6WxI+j5AISW+zLpn5AMM8WrJKInKKBwfyB8lNaPXXRR2MxmtmRwwMF0piBu+X9UhGY6xUfABj1f080Q7eqb8Pj5Ch1Le0cwtIXmjCXIc9GemYlXhb7NC1Z95KAmbbwavGI4fIY8zIvuRD1r1mRtRoEG84ZqJXURtXrhCtc1O9CQBG5CTtEtNX6IeQ4eZPja2uts=","ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO59VAtlNWejUR33M0r1ThDeEJM9nZE4TAbnXxneMOAY","ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCcY4prnNJs/I86WypkroySdqL7KQif8w46Bx4Lg/0S2j58hFWOQhw+Ql7YL09Rw0w+OruYXZ+l4rjnirWZqxbAHTUGf+IuoqnB/0jko6kEAhZx1YGYmQeKpMTrrX6jJj6HPtObHuJVnCy9LibFfndBUnfaze7U9ilTC33f6/551QwbL/BS4Wcm0CRD5mPE/9T7B4t5uRVTwlTR9+MTzTwfMpVW5hwnGAeRcP824jRBecVILUI6btBJoB3NseeLiIEM1BuAsxqZNBAft0L3hn7p7vIzK59h9jPpRubTkloE+4UYGqmX31O0V7ijFxFJ5v7TVHG1nRW+boIsnC1ELy/8Yi6281H/pSnqWz2Iwdz8+J8aXQJF/whV5OpwDIKKPBB14+jVVVbR9aH9Ycvjnqw/xSuwD9BMb31e3OWrEJnSl3/N35nqnGMFKm9r2ULKBWAXXKm9IdCsVBGcjnRtZskIyBRihQnUpLuD9zM/I1UTAoEJ3WKXc60EeIQem3ux1aU="],
+  "nodes": {
+    "client": {
+      "index": "0",
+      "shortname": "client",
+      "longname": "clab-Layer-3-Advanced-Lab-client",
+      "fqdn": "client.Layer-3-Advanced-Lab.io",
+      "group": "",
+      "labdir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/client",
+      "kind": "linux",
+      "image": "ghcr.io/hellt/network-multitool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fd0223816132",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/client",
+        "clab-node-longname": "clab-Layer-3-Advanced-Lab-client",
+        "clab-node-name": "client",
+        "clab-node-type": "",
+        "clab-owner": "ccompain",
+        "clab-topo-file": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/topology.clab.yml",
+        "containerlab": "Layer-3-Advanced-Lab"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "edge": {
+      "index": "1",
+      "shortname": "edge",
+      "longname": "clab-Layer-3-Advanced-Lab-edge",
+      "fqdn": "edge.Layer-3-Advanced-Lab.io",
+      "group": "",
+      "labdir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/edge",
+      "kind": "ceos",
+      "image": "ceos:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.11",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:76:fd:c7",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fd0223816132",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/edge",
+        "clab-node-longname": "clab-Layer-3-Advanced-Lab-edge",
+        "clab-node-name": "edge",
+        "clab-node-type": "",
+        "clab-owner": "ccompain",
+        "clab-topo-file": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/topology.clab.yml",
+        "containerlab": "Layer-3-Advanced-Lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "isp": {
+      "index": "2",
+      "shortname": "isp",
+      "longname": "clab-Layer-3-Advanced-Lab-isp",
+      "fqdn": "isp.Layer-3-Advanced-Lab.io",
+      "group": "",
+      "labdir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/isp",
+      "kind": "ceos",
+      "image": "ceos:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.10",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:8c:bb:0e",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fd0223816132",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/isp",
+        "clab-node-longname": "clab-Layer-3-Advanced-Lab-isp",
+        "clab-node-name": "isp",
+        "clab-node-type": "",
+        "clab-owner": "ccompain",
+        "clab-topo-file": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/topology.clab.yml",
+        "containerlab": "Layer-3-Advanced-Lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r1": {
+      "index": "3",
+      "shortname": "r1",
+      "longname": "clab-Layer-3-Advanced-Lab-r1",
+      "fqdn": "r1.Layer-3-Advanced-Lab.io",
+      "group": "",
+      "labdir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/r1",
+      "kind": "ceos",
+      "image": "ceos:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.12",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:7b:69:a3",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fd0223816132",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/r1",
+        "clab-node-longname": "clab-Layer-3-Advanced-Lab-r1",
+        "clab-node-name": "r1",
+        "clab-node-type": "",
+        "clab-owner": "ccompain",
+        "clab-topo-file": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/topology.clab.yml",
+        "containerlab": "Layer-3-Advanced-Lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r2": {
+      "index": "4",
+      "shortname": "r2",
+      "longname": "clab-Layer-3-Advanced-Lab-r2",
+      "fqdn": "r2.Layer-3-Advanced-Lab.io",
+      "group": "",
+      "labdir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/r2",
+      "kind": "ceos",
+      "image": "ceos:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.13",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:61:52:42",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fd0223816132",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/r2",
+        "clab-node-longname": "clab-Layer-3-Advanced-Lab-r2",
+        "clab-node-name": "r2",
+        "clab-node-type": "",
+        "clab-owner": "ccompain",
+        "clab-topo-file": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/topology.clab.yml",
+        "containerlab": "Layer-3-Advanced-Lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "site1": {
+      "index": "5",
+      "shortname": "site1",
+      "longname": "clab-Layer-3-Advanced-Lab-site1",
+      "fqdn": "site1.Layer-3-Advanced-Lab.io",
+      "group": "",
+      "labdir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/site1",
+      "kind": "linux",
+      "image": "ghcr.io/hellt/network-multitool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fd0223816132",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/site1",
+        "clab-node-longname": "clab-Layer-3-Advanced-Lab-site1",
+        "clab-node-name": "site1",
+        "clab-node-type": "",
+        "clab-owner": "ccompain",
+        "clab-topo-file": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/topology.clab.yml",
+        "containerlab": "Layer-3-Advanced-Lab"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "site2": {
+      "index": "6",
+      "shortname": "site2",
+      "longname": "clab-Layer-3-Advanced-Lab-site2",
+      "fqdn": "site2.Layer-3-Advanced-Lab.io",
+      "group": "",
+      "labdir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/site2",
+      "kind": "linux",
+      "image": "ghcr.io/hellt/network-multitool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fd0223816132",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/clab-Layer-3-Advanced-Lab/site2",
+        "clab-node-longname": "clab-Layer-3-Advanced-Lab-site2",
+        "clab-node-name": "site2",
+        "clab-node-type": "",
+        "clab-owner": "ccompain",
+        "clab-topo-file": "/Users/ccompain/Library/CloudStorage/GoogleDrive-ccompain@arista.com/My Drive/code/Dauphine/MIAGE/network-101/labs/Seminar-3.1/clab/topology.clab.yml",
+        "containerlab": "Layer-3-Advanced-Lab"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "links": [
+    {
+      "endpoints": {
+        "a": {
+          "node": "client",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:a1:e2:49",
+          "peer": "z"
+        },
+        "z": {
+          "node": "isp",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:12:f2:4b",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "isp",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:8b:45:fa",
+          "peer": "z"
+        },
+        "z": {
+          "node": "edge",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:b7:a9:58",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "edge",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:ee:a3:e5",
+          "peer": "z"
+        },
+        "z": {
+          "node": "r1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:86:7b:0c",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "edge",
+          "interface": "eth3",
+          "mac": "aa:c1:ab:6c:92:42",
+          "peer": "z"
+        },
+        "z": {
+          "node": "r2",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:77:18:2e",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "r1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:d9:4d:0f",
+          "peer": "z"
+        },
+        "z": {
+          "node": "r2",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:50:75:80",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "r1",
+          "interface": "eth3",
+          "mac": "aa:c1:ab:e2:f0:ca",
+          "peer": "z"
+        },
+        "z": {
+          "node": "site1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:56:83:45",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "r2",
+          "interface": "eth3",
+          "mac": "aa:c1:ab:d3:23:41",
+          "peer": "z"
+        },
+        "z": {
+          "node": "site2",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:da:d4:91",
+          "peer": "a"
+        }
+      }
+    }
+  ]
+}

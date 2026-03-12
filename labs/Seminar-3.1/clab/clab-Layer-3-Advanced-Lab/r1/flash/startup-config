@@ -1,0 +1,71 @@
+! Startup-config last modified at Thu Mar 12 06:14:46 2026 by root
+! device: r1 (cEOSLab, EOS-4.34.2F-43237028.4342F (engineering build))
+!
+enable password sha512 $6$cUXeeLzz4OJgKqVK$y8rbm0X3mwkYMij/t8fo113QVTP42uAL5Z7sUD8K/P9HeTh58mUxdUeF.1Mn.y8fNY.ZYRPLi5Yml26DHqWBp.
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$kCYqT8pENh6ltMk8$ntk/sAlWF95j34v1gpP/UD.z9/dEAGvI/F1Lzj1j.IP.SDcHWhKG.wN3qRv8U4IBzwa7PaHPyClICUw5AM7mE1
+!
+management api http-commands
+   no shutdown
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname r1
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+vlan 10
+   name SITE1_VLAN
+!
+interface Ethernet1
+   description Link to EDGE
+   no switchport
+   ip address 172.16.100.6/30
+!
+interface Ethernet2
+   description Link to R2
+   no switchport
+   ip address 172.16.100.13/30
+!
+interface Ethernet3
+   description Link to SITE1
+   switchport access vlan 10
+!
+interface Loopback0
+   description Router ID
+   ip address 172.16.0.3/32
+!
+interface Management0
+   ip address 172.20.20.12/24
+!
+interface Vlan10
+   description SITE1 Network
+   ip address 10.1.10.1/24
+!
+ip routing
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+router ospf 1
+   router-id 172.16.0.3
+   network 10.1.10.0/24 area 0.0.0.0
+   network 172.16.0.3/32 area 0.0.0.0
+   network 172.16.100.4/30 area 0.0.0.0
+   network 172.16.100.12/30 area 0.0.0.0
+   max-lsa 12000
+!
+end

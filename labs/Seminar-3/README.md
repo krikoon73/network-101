@@ -1,4 +1,4 @@
-# Layer-3 Lab (Part #1)
+# Layer-3 Lab
 
 This lab covers fundamental Layer-3 routing concepts including:
 - **Inter-VLAN Routing**: Routing between different VLANs
