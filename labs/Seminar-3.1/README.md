@@ -50,25 +50,25 @@ What is already configured:
 
 ### Task 1: configure OSPF on R1 and R2
 
-Task1.1: Configure OSPF on R1 and R2 to redistribute static routes learned from SITE1 and SITE2 to EDGE. 
-Task1.2: Verify that SITE1 and SITE2 can communicate with each other via ping.
+- Task1.1: Configure OSPF on R1 and R2 to redistribute static routes learned from SITE1 and SITE2 to EDGE. 
+- Task1.2: Verify that SITE1 and SITE2 can communicate with each other via ping.
 
 ### Task 2: configure OSPF on EDGE
 
-Task2.1: Configure OSPF on EDGE.
-Task2.2: Verify that EDGE, R1 and R2 can ping each other's loopback interfaces.
-Task2.3: Verify that SITE1 can reach 172.16.0.1 (EDGE) via ping
-Task2.4: Verify that SITE2 can reach 172.16.0.1 (EDGE) via ping
+- Task2.1: Configure OSPF on EDGE.
+- Task2.2: Verify that EDGE, R1 and R2 can ping each other's loopback interfaces.
+- Task2.3: Verify that SITE1 can reach 172.16.0.1 (EDGE) via ping
+- Task2.4: Verify that SITE2 can reach 172.16.0.1 (EDGE) via ping
 
 ### Task 3: configure external BGP on EDGE and on ISP
 
-Task 3.1: Configure eBGP on EDGE and on ISP.
-Task 3.2: Capture via Wireshark on EDGE the BGP session establishment.
-Task 3.3: Redistribute SITE1 and SITE2 routes into BGP on EDGE.
-Task 3.4: Redistribute CLIENT route into BGP on ISP.
-Task 3.5: Veryfy routing tables on all devices to verify the routes.
-Task 3.6: Verify that SITE1 can reach 10.3.10.10 (CLIENT) via ping and traceroute
-Task 3.7: Verify that SITE2 can reach 10.3.10.10 (CLIENT) via ping and traceroute
+- Task 3.1: Configure eBGP on EDGE and on ISP.
+- Task 3.2: Capture via Wireshark on EDGE the BGP session establishment.
+- Task 3.3: Redistribute SITE1 and SITE2 routes into BGP on EDGE.
+- Task 3.4: Redistribute CLIENT route into BGP on ISP.
+- Task 3.5: Veryfy routing tables on all devices to verify the routes.
+- Task 3.6: Verify that SITE1 can reach 10.3.10.10 (CLIENT) via ping and traceroute
+- Task 3.7: Verify that SITE2 can reach 10.3.10.10 (CLIENT) via ping and traceroute
 
 
 
