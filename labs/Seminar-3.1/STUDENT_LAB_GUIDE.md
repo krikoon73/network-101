@@ -176,12 +176,12 @@ Enter configuration mode and configure OSPF:
 ```
 configure
 router ospf 1
-   router-id 172.16.0.3
-   network 172.16.0.3/32 area 0.0.0.0
-   network 172.16.100.4/30 area 0.0.0.0
-   network 172.16.100.12/30 area 0.0.0.0
-   redistribute static
-   max-lsa 12000
+router-id 172.16.0.3
+network 172.16.0.3/32 area 0.0.0.0
+network 172.16.100.4/30 area 0.0.0.0
+network 172.16.100.12/30 area 0.0.0.0
+redistribute static
+max-lsa 12000
 end
 write memory
 ```
@@ -211,12 +211,12 @@ Enter configuration mode and configure OSPF:
 ```
 configure
 router ospf 1
-   router-id 172.16.0.4
-   network 172.16.0.4/32 area 0.0.0.0
-   network 172.16.100.8/30 area 0.0.0.0
-   network 172.16.100.12/30 area 0.0.0.0
-   redistribute static
-   max-lsa 12000
+router-id 172.16.0.4
+network 172.16.0.4/32 area 0.0.0.0
+network 172.16.100.8/30 area 0.0.0.0
+network 172.16.100.12/30 area 0.0.0.0
+redistribute static
+max-lsa 12000
 end
 write memory
 ```
@@ -314,11 +314,11 @@ Enter configuration mode and configure OSPF:
 ```
 configure
 router ospf 1
-   router-id 172.16.0.1
-   network 172.16.0.1/32 area 0.0.0.0
-   network 172.16.100.4/30 area 0.0.0.0
-   network 172.16.100.8/30 area 0.0.0.0
-   max-lsa 12000
+router-id 172.16.0.1
+network 172.16.0.1/32 area 0.0.0.0
+network 172.16.100.4/30 area 0.0.0.0
+network 172.16.100.8/30 area 0.0.0.0
+max-lsa 12000
 end
 write memory
 ```
