@@ -27,7 +27,7 @@ Wireshark” Lab if you’re uncertain about the Wireshark windows).
 - **Client IP Address:** 192.168.86.68
 - **Client TCP Port:** 55639
 
-**Question 2. **
+**Question 2.**
 What is the IP address of server? On what port number is it sending
 and receiving TCP segments for this connection?
 
