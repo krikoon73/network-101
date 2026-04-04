@@ -1,6 +1,8 @@
 .python-version
 !anta/*
 !anta/**
+venv/
+assets/data.txt
 .venv/*
 .venv/**
 */.venv/*
