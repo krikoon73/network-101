@@ -1,0 +1,36 @@
+// TP4 — gRPC Metrics Streaming Service
+// =====================================
+// This file defines the gRPC service contract using Protocol Buffers.
+//
+// It describes:
+//   - The service (MetricsService) and its RPC method (StreamMetrics)
+//   - The request message (MetricsRequest) sent once by the client
+//   - The response message (MetricUpdate) streamed by the server
+//
+// After setup.sh runs, two Python files are generated from this file:
+//   - metrics_pb2.py      : message classes (MetricsRequest, MetricUpdate)
+//   - metrics_pb2_grpc.py : service classes (stub + servicer base class)
+//
+// Do NOT modify this file.
+
+syntax = "proto3";
+
+// MetricsService exposes one RPC method with server-side streaming.
+// The client sends a single MetricsRequest; the server streams back
+// multiple MetricUpdate messages over the same HTTP/2 connection.
+service MetricsService {
+  rpc StreamMetrics (MetricsRequest) returns (stream MetricUpdate);
+}
+
+// Sent once by the client to initiate the stream.
+message MetricsRequest {
+  string client_id = 1;   // An identifier for this client session (e.g. "student-1")
+}
+
+// Sent repeatedly by the server, one message per second.
+message MetricUpdate {
+  string timestamp    = 1;   // ISO-8601 timestamp (e.g. "2024-01-15T14:30:05")
+  float  bandwidth_mb = 2;   // Simulated network bandwidth in MB/s
+  float  latency_ms   = 3;   // Simulated round-trip latency in ms
+  int32  packet_loss  = 4;   // Simulated packet loss percentage (0–5)
+}
